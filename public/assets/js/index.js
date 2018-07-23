@@ -30,15 +30,20 @@ $(".remove").on("click", function() {
 
 //Handle Save Note button
 $(".saveNote").on("click", function() {
+
   var id = $(this).attr("data-id");
+  console.log(id + 'what id?')
+  
   if (!$("#noteBody").val()) {
       alert("please enter a note")
+      ;debugger
   }else {
     $.ajax({
           method: "POST",
           url: "/notes/save/" + id,
           data: {
-            text: $("#noteBody").val()
+            text: $("#noteBody").val(),
+            id: id
           }
         }).done(function() {
             $("#noteBody" + id).val("");

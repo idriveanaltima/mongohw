@@ -1,6 +1,6 @@
 
 
-<div class="modal" id="noteModal{{this._id}}" tabindex="-1" role="dialog">
+<div class="modal" id="noteModal{{this._id}}"  tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -15,7 +15,7 @@
           <div class="panel panel-default">
             <div class="panel-body">
               <p class="previousNotes">
-                {{this.body}}
+                {{this.text}}
               </p>
               <button
                 type="button"
@@ -41,7 +41,7 @@
          <textarea id="noteBody" class="form-control" rows="6" placeholder="New Note"></textarea>
         </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary saveNote">Save changes</button>
+        <button type="button" class="btn btn-primary saveNote" data-id="{{this.id}}">Save changes</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>

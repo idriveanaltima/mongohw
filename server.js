@@ -13,13 +13,15 @@ mongoose.connect(MONGODB_URI)
 
 const db = mongoose.connection;
 
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 require("./controllers/index.js")(app, db);
 require("./controllers/note.js")(app, db);
 require("./controllers/article.js")(app, db);
 
-app.use(express.static("public"));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
 
 app.engine("handlebars", exphnd({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
