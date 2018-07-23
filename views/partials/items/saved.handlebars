@@ -1,0 +1,26 @@
+{{> items/navbar}}
+
+<div class="container">
+
+    <div class="col-md-12 jumbotron">
+        <div class="text-center">
+            <h1> Saved Articles</h1>
+        </div>
+    </div>
+    <div class="col-md-12">
+      {{#if article}}
+			{{> items/notes}}
+        {{else}}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4>You have no saved articles.</h4>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>
+
+<!--Clicked Notes Modal-->
+{{#each article}}
+    {{> items/notes }}
+{{/each}}

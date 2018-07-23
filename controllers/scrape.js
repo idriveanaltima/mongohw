@@ -16,9 +16,9 @@ module.exports =  function(app) {
           result.title = $(this).text();
           result.link = $(this).children("a").attr("href");
 
-          var insert = new Article(result)
+          var topResults = new Article(result)
           // Now, save that insert to the db
-          insert.save(function(err, doc) {
+          topResults.save(function(err, doc) {
             // Log any errors
             if (err) {
               console.log(err);
@@ -30,7 +30,9 @@ module.exports =  function(app) {
           });
     
         });
-            res.send("Scrape Complete");
+            res.redirect("/");
+    
       });
+
     });
   };

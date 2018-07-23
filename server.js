@@ -2,8 +2,6 @@ const express = require("express");
 const exphnd = require("express-handlebars");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const db = mongoose.connection;
-
 const app = express();
 
 const PORT = process.env.PORT || 8080;
@@ -15,9 +13,11 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlin
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI)
 
-require("./controllers/index.js")(app);
-require("./controllers/scrape.js")(app);
-require("./controllers/article.js")(app);
+const db = mongoose.connection;
+
+require("./controllers/index.js")(app, db);
+require("./controllers/scrape.js")(app, db);
+require("./controllers/article.js")(app, db);
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,7 +25,6 @@ app.use(bodyParser.json());
 
 app.engine("handlebars", exphnd({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-
 
 // Show any mongoose errors
 db.on("error", function(error) {

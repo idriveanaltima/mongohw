@@ -1,19 +1,25 @@
+var Article = require("../models/Article.js");
+
 module.exports = function(app) {
 
-
-// Route for getting all Articles from the db
-app.get("/articles", function(req, res) {
-  // TODO: Finish the route so it grabs all of the articles
-  db.Article.find({})
-  .then(function(article) {
-    // If all Users are successfully found, send them back to the client
-    res.json(article);
+  // Route for grabbing a specific Article by id, populate it with it's note
+app.put("/save/:id", function(req, res) {
+  // TODO
+  // ====
+  // Finish the route so it finds one article using the req.params.id,
+  // and run the populate method with "note",
+  // then responds with the article with the note included
+  Article.update({_id: req.params.id}, {$set: {saved: true}})
+  .then(function(dbArticle) {
+    // If the User was updated successfully, send it back to the client
+    res.json(dbArticle);
   })
   .catch(function(err) {
-    // If an error occurs, send the error back to the client
+    // If an error occurs, send it back to the client
     res.json(err);
   });
 });
+  
 
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
@@ -58,5 +64,4 @@ app.post("/articles/:id", function(req, res) {
     res.json(err);
   }); 
 });
-
 };
